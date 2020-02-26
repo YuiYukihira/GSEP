@@ -1,0 +1,28 @@
+{
+  "name": "gsep",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "concurrently -k -p \"[{name}]\" -n \"Player Client,Gamekeeper Client\" -c \"megenta.bold,cyan.bold\" \"yarn workspace player-client run start\" \"yarn workspace gamekeeper-client run start\"",
+    "build": "yarn workspace player-client run build && yarn workspace gamekeeper-client run build",
+    "lint": "yarn workspaces run lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn workspaces run precommit"
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "typescript": ">=2.8.0"
+  },
+  "dependencies": {
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8"
+  }
+}
